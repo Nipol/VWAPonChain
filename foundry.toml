@@ -1,0 +1,22 @@
+[profile.default]
+optimizer = true
+optimizer_runs = 42069
+src = 'contracts'
+out = 'artifacts'
+libs = ["node_modules", "lib"]
+gas_reports = ["*"]
+via_ir = true
+
+[profile.default.optimizer_details]
+constantOptimizer = true
+yul = true
+
+[profile.default.optimizer_details.yulDetails]
+stackAllocation = true
+optimizerSteps = 'dhfoDgvulfnTUtnIf'
+
+[rpc_endpoints]
+mainnet = "${MAINNET_RPC_URL}"
+optimism = "${OPTIMISM_RPC_URL}"
+
+# See more config options https://github.com/gakonst/foundry/tree/master/config

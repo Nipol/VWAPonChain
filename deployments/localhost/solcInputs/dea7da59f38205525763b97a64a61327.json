@@ -1,0 +1,39 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/Sample.sol": {
+      "content": "//SPDX-License-Identifier: UNLICENSED\npragma solidity ^0.8.0;\n\ncontract Sample {\n    string public name = \"Contract Template\";\n\n    constructor(string memory _name) {\n        name = _name;\n    }\n}\n"
+    }
+  },
+  "settings": {
+    "viaIR": false,
+    "optimizer": {
+      "enabled": true,
+      "runs": 42069,
+      "details": {
+        "yul": true
+      }
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "name": "Contract Template",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "VARIANT": "16-bullseye", // if you are x86-64 remove the "-bullseye"
+      "UPGRADE_PACKAGES": "true"
+    }
+  },
+  "runArgs": [
+    "--init",
+    "--dns",
+    "1.1.1.1",
+    "--privileged",
+    "-v",
+    "${env:HOME}${env:USERPROFILE}/.ssh:/home/node/.ssh-localhost:ro"
+  ],
+  "mounts": [
+    "source=dind-var-lib-docker,target=/var/lib/docker,type=volume",
+    "source=contracts-templates-node-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
+  ],
+  "overrideCommand": false,
+
+  // Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+  "remoteUser": "node",
+  "remoteEnv": {
+    "PATH": "${containerEnv:PATH}:/home/node/.local/bin:/home/node/.foundry/bin",
+    "SOLC_VERSION": "0.8.17",
+    "MAINNET_RPC_URL": ""
+  },
+
+  // Set *default* container specific settings.json values on container create.
+  "settings": {
+    "terminal.integrated.profiles.linux": {
+      "zsh (login)": {
+        "path": "zsh",
+        "args": ["-l"]
+      }
+    },
+    "terminal.integrated.defaultProfile.linux": "zsh (login)",
+    "solidity.packageDefaultDependenciesContractsDirectory": "contracts",
+    "solidity.remappings": [
+      "@beandao/=node_modules/@beandao",
+      "@openzeppelin/=node_modules/@openzeppelin/",
+      "@uniswap/=node_modules/@uniswap/",
+      "base64-sol/=node_modules/base64-sol/",
+      "hardhat/=node_modules/hardhat/",
+      "forge-std/=lib/forge-std/src/",
+      "hardhat/=node_modules/hardhat/",
+      "UniswapV3Pack/=lib/UniswapV3Pack/src/"
+    ],
+    "solidity.linter": "solhint",
+    "solidity.formatter": "prettier",
+    "solidity.compileUsingRemoteVersion": "0.8.17",
+    "solidity.enableLocalNodeCompiler": false,
+    "search.exclude": { "lib": true },
+    "git.ignoreLimitWarning": true,
+    "editor.rulers": [120],
+    "workbench.colorCustomizations": {
+      "editorRuler.foreground": "#ff408042"
+    },
+    "editor.formatOnSave": true,
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[solidity]": {
+      "editor.defaultFormatter": "JuanBlanco.solidity"
+    },
+    "files.associations": {
+      "*.yul": "solidity",
+      "*.yulp": "solidity"
+    },
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
+  },
+
+  // Add the IDs of extensions you want installed when the container is created.
+  "extensions": [
+    "ms-azuretools.vscode-docker",
+    "dbaeumer.vscode-eslint",
+    "tintinweb.graphviz-interactive-preview",
+    "esbenp.prettier-vscode",
+    "JuanBlanco.solidity",
+    "tintinweb.solidity-visual-auditor",
+    "ms-vscode.vscode-typescript-tslint-plugin",
+    "github.vscode-pull-request-github",
+    "styled-components.vscode-styled-components"
+  ],
+
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "zsh ./.devcontainer/postCreateCommand.sh"
+}
