@@ -1,5 +1,5 @@
 {
-  "name": "Contract Template",
+  "name": "VWAPonChain",
   "build": {
     "dockerfile": "Dockerfile",
     "args": {
@@ -17,7 +17,7 @@
   ],
   "mounts": [
     "source=dind-var-lib-docker,target=/var/lib/docker,type=volume",
-    "source=contracts-templates-node-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
+    "source=vwaponchain-node-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
   ],
   "overrideCommand": false,
 
