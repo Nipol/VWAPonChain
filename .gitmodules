@@ -1,0 +1,3 @@
+[submodule "lib/UniswapV3Pack"]
+	path = lib/UniswapV3Pack
+	url = https://github.com/Nipol/UniswapV3Pack
